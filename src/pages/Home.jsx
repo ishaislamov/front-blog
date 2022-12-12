@@ -23,6 +23,7 @@ export const Home = () => {
     dispatch(fetchPosts())
     dispatch(fetchTags())
   }, [])
+
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -32,11 +33,11 @@ export const Home = () => {
       <Grid container spacing={4}>
         <Grid xs={8} item>
           {( isPostLoading ? ([...Array(3)]) : posts.items).map((obj, index) => ( 
-            isPostLoading ? <Post key={index} isLoading={true}/> :
+            isPostLoading ? <Post key={index} isLoading={true} /> :
             <Post
             _id={obj._id}
             title={obj.title}
-            imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl} ` : ''}
+            imageUrl={obj.imageUrl ? `${process.env.REACT_APP_API_URL}${obj.imageUrl} ` : ''}
             user={obj.user}
             createdAt={obj.createdAt}
             viewsCount={obj.viewsCount}
